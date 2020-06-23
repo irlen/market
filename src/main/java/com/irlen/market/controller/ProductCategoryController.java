@@ -6,20 +6,21 @@ import com.irlen.market.result.ResultUtil;
 import com.irlen.market.service.ProductCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @Controller
 @RestController
 public class ProductCategoryController {
     @Autowired
     private ProductCategoryService pcService;
-    @RequestMapping("/category/add")
-    public Result addCategory(ProductCategory productCategory){
-        ProductCategory pc = new ProductCategory();
-        pc.setCategoryName(productCategory.getCategoryName());
-        pc.setCategoryType(productCategory.getCategoryType());
-        Integer result = pcService.saveCategory(pc);
-        return ResultUtil.success(result);
+
+
+    @RequestMapping(value="/category/getTable",method = RequestMethod.POST)
+    public Result getTableData(){
+        System.out.println("进入");
+        Result result = pcService.getCategoryTable();
+        return result;
     }
 }
