@@ -1,12 +1,12 @@
 package com.irlen.market.mapper;
 
+import com.irlen.market.dataObj.PageParam;
 import com.irlen.market.entity.ProductInfo;
 import com.irlen.market.entity.ProductInfo;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
+
 
 import java.util.List;
 
@@ -46,8 +46,45 @@ public interface ProductInfoMapper {
      * @return
      */
     @Select("select * from product_info where category_type=#{categoryType}")
+    @Results({
+            @Result(column = "product_id", property = "productId"),
+            @Result(column = "product_name", property = "productName"),
+            @Result(column = "product_price", property = "productPrice"),
+            @Result(column = "product_name", property = "productName"),
+            @Result(column = "product_real", property = "productReal"),
+            @Result(column = "product_stock", property = "productStock"),
+            @Result(column = "product_description", property = "productDescription"),
+            @Result(column = "product_icon", property = "productIcon"),
+            @Result(column = "category_type", property = "categoryType"),
+            @Result(column = "update_time", property = "updateTime"),
+    })
     List<ProductInfo> selectProductByCategoryType(Integer categoryType);
 
 
+    /**
+     * 查询所有的商品
+     * @return
+     */
+    @Select("select * from product_info limit #{current}, #{pageSize}")
+    @Results({
+            @Result(column = "product_id", property = "productId"),
+            @Result(column = "product_name", property = "productName"),
+            @Result(column = "product_price", property = "productPrice"),
+            @Result(column = "product_name", property = "productName"),
+            @Result(column = "product_real", property = "productReal"),
+            @Result(column = "product_stock", property = "productStock"),
+            @Result(column = "product_description", property = "productDescription"),
+            @Result(column = "product_icon", property = "productIcon"),
+            @Result(column = "category_type", property = "categoryType"),
+            @Result(column = "update_time", property = "updateTime"),
+    })
+    List<ProductInfo> selectAllProduct(PageParam pageParam);
+
+    /**
+     * 统计商品总数
+     * @return
+     */
+    @Select("select count(*) from product_info")
+    int getCount();
 
 }

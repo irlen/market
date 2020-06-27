@@ -11,7 +11,6 @@ import java.util.List;
 public class ProductCategoryDao {
     @Autowired
     private ProductCategoryMapper pcMapper;
-
     /**
      * 增加一个类目
      * @param productCategory
@@ -20,6 +19,19 @@ public class ProductCategoryDao {
     public Integer saveCategory(ProductCategory productCategory){
         Integer result = pcMapper.addCategory(productCategory);
         return result;
+    }
+
+    /**
+     * 判断是否有重复
+     * @param productCategory
+     * @return
+     */
+    public Boolean isUniq(ProductCategory productCategory){
+        List<ProductCategory> pcList = pcMapper.isUniq(productCategory);
+        if(pcList.size()>0){
+            return false;
+        }
+        return true;
     }
 
     /**

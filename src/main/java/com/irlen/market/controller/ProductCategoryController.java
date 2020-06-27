@@ -19,8 +19,19 @@ public class ProductCategoryController {
 
     @RequestMapping(value="/category/getTable",method = RequestMethod.POST)
     public Result getTableData(){
-        System.out.println("进入");
         Result result = pcService.getCategoryTable();
+        return result;
+    }
+
+    @RequestMapping(value="/category/saveCategory",method=RequestMethod.POST)
+    public Result saveCategory(@RequestBody  ProductCategory pc) {
+        ProductCategory productCategory = new ProductCategory();
+        productCategory.setCategoryType(pc.getCategoryType());
+        productCategory.setCategoryName(pc.getCategoryName());
+        if (pc.getCategoryId() != null) {
+            productCategory.setCategoryId(pc.getCategoryId());
+        }
+        Result result = pcService.saveCategory(productCategory);
         return result;
     }
 }

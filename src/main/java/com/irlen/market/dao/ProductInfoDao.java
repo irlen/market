@@ -1,8 +1,10 @@
 package com.irlen.market.dao;
 
+import com.irlen.market.dataObj.PageParam;
 import com.irlen.market.entity.ProductInfo;
 import com.irlen.market.mapper.ProductInfoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -40,6 +42,25 @@ public class ProductInfoDao {
     public List<ProductInfo> selectProductByCategoryType(Integer categoryType){
         List<ProductInfo> piList = piMapper.selectProductByCategoryType(categoryType);
         return piList;
+    }
+
+    /**
+     * 查找所有产品
+     * @param pageParam
+     * @return
+     */
+    public List<ProductInfo> selectAllProduct(PageParam pageParam){
+        List<ProductInfo> piList = piMapper.selectAllProduct(pageParam);
+        return piList;
+    }
+
+    /**
+     * 查找所有商品总数
+     * @return
+     */
+    public int getCount(){
+        int result = piMapper.getCount();
+        return result;
     }
 
 }

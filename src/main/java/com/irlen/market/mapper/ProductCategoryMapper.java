@@ -23,4 +23,12 @@ public interface ProductCategoryMapper {
             @Result(column = "category_type", property = "categoryType")
     })
     List<ProductCategory> selectAll();
+
+    /**
+     * 判断类目名和类目类型是否有重复
+     * @param productCategory
+     * @return
+     */
+    @Select("select * from product_category where category_name=#{categoryName} or category_type=#{categoryType}")
+    List<ProductCategory> isUniq(ProductCategory productCategory);
 }

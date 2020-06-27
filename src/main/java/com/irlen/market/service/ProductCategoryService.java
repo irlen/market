@@ -23,9 +23,19 @@ public class ProductCategoryService {
      * @param productCategory
      * @return
      */
-    public Integer saveCategory(ProductCategory productCategory){
-        Integer result = pcDao.saveCategory(productCategory);
-        return result;
+    public Result saveCategory(ProductCategory productCategory){
+
+        if(productCategory.getCategoryId() != null){
+            Integer result = pcDao.saveCategory(productCategory);
+            return ResultUtil.success(result);
+        }
+        Boolean isHas = pcDao.isUniq(productCategory);
+        if(isHas){
+            Integer result = pcDao.saveCategory(productCategory);
+            return ResultUtil.success(result);
+        }else{
+            return ResultUtil.error(0,"类目名或者类型重复！");
+        }
     }
 
     /**
