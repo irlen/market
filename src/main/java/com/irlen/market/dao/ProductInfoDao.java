@@ -1,6 +1,7 @@
 package com.irlen.market.dao;
 
 import com.irlen.market.dataObj.PageParam;
+import com.irlen.market.dataObj.ProductInfoForTable;
 import com.irlen.market.entity.ProductInfo;
 import com.irlen.market.mapper.ProductInfoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,8 +50,8 @@ public class ProductInfoDao {
      * @param pageParam
      * @return
      */
-    public List<ProductInfo> selectAllProduct(PageParam pageParam){
-        List<ProductInfo> piList = piMapper.selectAllProduct(pageParam);
+    public List<ProductInfoForTable> selectAllProduct(PageParam pageParam){
+        List<ProductInfoForTable> piList = piMapper.selectAllProduct(pageParam);
         return piList;
     }
 

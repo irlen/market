@@ -2,6 +2,7 @@ package com.irlen.market.service;
 
 import com.irlen.market.dao.ProductInfoDao;
 import com.irlen.market.dataObj.PageParam;
+import com.irlen.market.dataObj.ProductInfoForTable;
 import com.irlen.market.dataObj.XData;
 import com.irlen.market.entity.ProductInfo;
 import com.irlen.market.result.Result;
@@ -52,7 +53,7 @@ public class ProductInfoService {
     }
 
     public Result selectAllProduct(PageParam pageParam){
-        List<ProductInfo> piList = piDao.selectAllProduct(pageParam);
+        List<ProductInfoForTable> piList = piDao.selectAllProduct(pageParam);
         int piCount = piDao.getCount();
         Map<String,Object> map = new HashMap<>();
         map.put("yData",piList);

@@ -1,4 +1,4 @@
-package com.irlen.market.entity;
+package com.irlen.market.dataObj;
 
 import lombok.Data;
 import org.hibernate.annotations.DynamicUpdate;
@@ -11,7 +11,7 @@ import java.util.Date;
 @Entity
 @DynamicUpdate
 @Data
-public class ProductInfo {
+public class ProductInfoForTable {
     @Id
     private String productId;
     private String productName;
@@ -20,7 +20,7 @@ public class ProductInfo {
     private Integer productStock;
     private String productDescription;
     private String productIcon;
-    private Integer categoryType;
+    private String categoryType;
     private Integer productStatus;
     private Date updateTime;
 }

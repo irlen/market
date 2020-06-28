@@ -24,12 +24,17 @@ public class ProductCategoryController {
     }
 
     @RequestMapping(value="/category/saveCategory",method=RequestMethod.POST)
-    public Result saveCategory(@RequestBody  ProductCategory pc) {
+    public Result saveCategory(
+            @RequestParam("categoryName")  String categoryName,
+            @RequestParam("categoryType")  Integer categoryType,
+            @RequestParam(value="categoryId",required = false,defaultValue = "0")  Integer categoryId
+    ) {
+
         ProductCategory productCategory = new ProductCategory();
-        productCategory.setCategoryType(pc.getCategoryType());
-        productCategory.setCategoryName(pc.getCategoryName());
-        if (pc.getCategoryId() != null) {
-            productCategory.setCategoryId(pc.getCategoryId());
+        productCategory.setCategoryType(categoryType);
+        productCategory.setCategoryName(categoryName);
+        if (categoryId != null) {
+            productCategory.setCategoryId(categoryId);
         }
         Result result = pcService.saveCategory(productCategory);
         return result;
